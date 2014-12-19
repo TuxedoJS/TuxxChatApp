@@ -1,0 +1,17 @@
+{
+  "name": "ExampleReactChatApp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/TuxedoJS/ExampleReactChatApp",
+  "authors": [
+    "drabinowitz <dmitrirabinowitz+development@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}

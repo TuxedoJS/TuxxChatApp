@@ -1,0 +1,36 @@
+{
+  "name": "ExampleReactChatApp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "watchify -d client/app.js -o client/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TuxedoJS/ExampleReactChatApp"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TuxedoJS/ExampleReactChatApp/issues"
+  },
+  "homepage": "https://github.com/TuxedoJS/ExampleReactChatApp",
+  "devDependencies": {
+    "browserify": "^7.0.3",
+    "envify": "^3.2.0",
+    "reactify": "^0.17.1",
+    "watchify": "^2.2.1"
+  },
+  "dependencies": {
+    "flux": "^2.0.1",
+    "react": "^0.12.2"
+  }
+}
