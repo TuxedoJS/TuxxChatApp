@@ -2,3 +2,4 @@ node_modules/
 dist/
 .sass-cache/
 client/bundle.js
+npm-debug.log
