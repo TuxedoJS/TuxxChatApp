@@ -31,14 +31,14 @@ $.ajax = function(req) {
           }
         }
         else {
-          defered.resolve(data);
+          defered.resolve(data.slice());
         }
       }
       else if (req.location === 'messages') {
         if (typeof(req.data.roomId) !== 'undefined') {
           for (i = 0; i < data.length; i++) {
             if (data[i].id === req.data.roomId) {
-              defered.resolve(data[i].messages);
+              defered.resolve(data[i].messages.slice());
             }
           }
         }
