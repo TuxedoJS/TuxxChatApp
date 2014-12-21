@@ -1,6 +1,8 @@
 'use strict';
 
 var React = require("react");
+var Router = require('react-router');
+var Link = Router.Link;
 
 var Room = React.createClass({
   propTypes: {
@@ -57,7 +59,7 @@ var Room = React.createClass({
     else {
       roomContent = (
         <div>
-          <h1>{this.props.room.name}</h1>
+          <Link to="rooms.room" params={{roomId: this.props.room.id}}>{this.props.room.name}</Link>
           <button onClick={this.edit}>Edit</button>
           <button onClick={this.deleteRoom}>Delete</button>
         </div>

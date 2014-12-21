@@ -1,14 +1,15 @@
 var React = require('react');
-var Messages = require('./Messages.jsx');
-var RoomView = require("./room/RoomView.jsx");
+var Router = require('react-router');
+var Link = Router.Link;
+var RouteHandler = Router.RouteHandler;
 
 var Welcome = React.createClass({
   render: function () {
     return (
       <div>
-        <RoomView />
         <h1>Hello World!</h1>
-        <Messages rooms={this.props.rooms}/>
+        <Link to="rooms">View Rooms</Link>
+        <RouteHandler />
       </div>
     );
   }
