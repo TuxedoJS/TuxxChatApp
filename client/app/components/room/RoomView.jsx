@@ -34,19 +34,24 @@ var RoomView = React.createClass({
     RoomStore.removeChangeListener(this.listenerCallback);
   },
 
-  createRoom: function(name) {
-    RoomActions.create({name: name});
-  },
+  methods: {
 
-  deleteRoom: function(id) {
-    RoomActions.destroy({id: id});
-  },
+    createRoom: function(name) {
+      RoomActions.create({name: name});
+    },
 
-  updateRoom: function(name, id) {
-    RoomActions.update({name:name, id:id});
+    deleteRoom: function(id) {
+      RoomActions.destroy({id: id});
+    },
+
+    updateRoom: function(name, id) {
+      RoomActions.update({name:name, id:id});
+    }
+
   },
 
   render: function() {
+    var { createRoom, ...methods } = this.methods;
     var rooms = this.state.rooms;
     var roomId = this.getParams().roomId;
     if (roomId !== undefined) {
@@ -59,9 +64,9 @@ var RoomView = React.createClass({
     }
     return (
       <div>
-        <RoomCreateForm createRoom={this.createRoom} />
+        <RoomCreateForm createRoom={createRoom} />
         <h1>{roomName ? 'You are in room: ' + roomName : "Click a room name to continue"}</h1>
-        <Rooms rooms={this.state.rooms} deleteRoom={this.deleteRoom} updateRoom={this.updateRoom} />
+        <Rooms rooms={this.state.rooms} {...methods} />
         <RouteHandler />
       </div>
     );

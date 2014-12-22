@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "watchify -d client/app.js -o client/bundle.js",
+    "start": "watchify -d client/app.js -o client/bundle.js -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "browserify": {
     "transform": [
-      "reactify",
+      ["reactify", {"es6": true}],
       "envify"
     ]
   },
