@@ -98,7 +98,6 @@ $.ajax = function(req) {
               }
             }
           }
-          defered.resolve(true);
         }
       }
     }, 2000);

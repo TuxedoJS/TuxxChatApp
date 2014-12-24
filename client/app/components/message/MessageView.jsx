@@ -5,17 +5,22 @@ var MessageStore = require('../../stores/MessageStore');
 var MessageActions = require('../../actions/MessageActions');
 var Messages = require('./Messages.jsx');
 var MessageForm = require('./MessageForm.jsx');
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 
 var MessageView = React.createClass({
+  mixins: [
+    Router.State
+  ],
+
+  getMessagesForRoom: function (id) {
+    id = parseInt(this.getParams().roomId, 10);
+    MessageStore.get(id);
+  },
+
   getInitialState: function () {
     return {
       messages: MessageStore.all()
-    };
-  },
-
-  getDefaultProps: function() {
-    return {
-      roomId: 1
     };
   },
 
@@ -27,11 +32,14 @@ var MessageView = React.createClass({
 
   componentDidMount: function () {
     MessageStore.addChangeListener(this.listenerCallback);
-    MessageActions.get({ roomId: this.props.roomId });
   },
 
   componentWillUnmount: function () {
     MessageStore.removeChangeListener(this.listenerCallback);
+  },
+
+  componentWillReceiveProps: function () {
+    this.getMessagesForRoom();
   },
 
   createMessage: function (text, roomId, username) {
@@ -47,10 +55,11 @@ var MessageView = React.createClass({
   },
 
   render: function () {
+    var roomId = this.getParams().roomId;
     return (
       <div>
-        <MessageForm createMessage={this.createMessage} updateMessage={this.updateMessage} />
-        <Messages messages={this.state.messages} deleteMessage={this.deleteMessage} updateMessage={this.updateMessage} roomId={this.props.roomId} />
+        <MessageForm createMessage={this.createMessage} updateMessage={this.updateMessage} roomId={roomId} />
+        <Messages messages={this.state.messages} deleteMessage={this.deleteMessage} updateMessage={this.updateMessage} roomId={roomId} />
       </div>
     );
   }

@@ -10,7 +10,6 @@ var MessageForm = React.createClass({
 
   getDefaultProps: function () {
     return {
-      roomId: 1,
       username: 'Gunnari',
       editing: false
     };
@@ -20,11 +19,13 @@ var MessageForm = React.createClass({
     e.preventDefault();
     var messageNode = this.refs.message.getDOMNode();
     var message = messageNode.value.trim();
+    var roomId = parseInt(this.props.roomId, 10);
 
     if (this.props.editing) {
-      this.props.updateMessage(message, this.props.roomId, this.props.message.id);
+      this.props.updateMessage(message, roomId, this.props.message.id);
+      this.props.closeEditForm();
     } else {
-      this.props.createMessage(message, this.props.roomId, this.props.username);
+      this.props.createMessage(message, roomId, this.props.username);
     }
 
     messageNode.value = '';

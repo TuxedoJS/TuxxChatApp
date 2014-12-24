@@ -10,20 +10,21 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 var NotFound = require('./app/components/routes/NotFound.jsx');
-var Messages = require('./app/components/Messages.jsx');
+var MessageView = require('./app/components/message/MessageView.jsx');
 var RoomView = require('./app/components/room/RoomView.jsx');
 var DefaultWelcome = require('./app/components/DefaultWelcome.jsx');
+
 
 var routes = (
   <Route name="app" path="/" handler={Welcome}>
     <DefaultRoute handler={DefaultWelcome} />
     <Route name="rooms" path="/rooms" handler={RoomView}>
-      <Route name="rooms.room" path="/rooms/:roomId" handler={Messages} />
+      <Route name="rooms.room" path="/rooms/:roomId" handler={MessageView} />
     </Route>
     <NotFoundRoute handler={NotFound} />
   </Route>
 );
 
 Router.run(routes, function(Handler) {
-  React.render(<Handler/>, document.getElementById("main"));
+  React.render(<Handler />, document.getElementById("main"));
 });

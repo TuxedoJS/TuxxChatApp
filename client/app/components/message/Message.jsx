@@ -20,6 +20,10 @@ var Message = React.createClass({
     this.setState({ editing: false });
   },
 
+  closeEditForm: function() {
+    this.setState({ editing: false });
+  },
+
   edit: function(e) {
     e.preventDefault();
     if (this.isMounted()) {
@@ -36,7 +40,7 @@ var Message = React.createClass({
     var editForm;
     var message = this.props.message;
     if (this.state.editing) {
-      editForm = <MessageForm message={message} editing={this.state.editing} updateMessage={this.props.updateMessage} />
+      editForm = <MessageForm message={message} editing={this.state.editing} updateMessage={this.props.updateMessage} roomId={this.props.roomId} closeEditForm={this.closeEditForm} />
     }
 
     return (

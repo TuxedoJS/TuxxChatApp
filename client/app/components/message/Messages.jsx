@@ -4,6 +4,12 @@ var React = require('react');
 var Message = require('./Message.jsx');
 
 var Messages = React.createClass({
+  propTypes: {
+    messages: React.PropTypes.array.isRequired,
+    deleteMessage: React.PropTypes.func,
+    updateMessage: React.PropTypes.func
+  },
+
   render: function () {
     var messages = [];
     var message;
