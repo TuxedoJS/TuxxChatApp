@@ -16,7 +16,7 @@ var Messages = React.createClass({
 
     for (var i = 0; i < this.props.messages.length; i++) {
       message = this.props.messages[i];
-      messages.push(<Message key={message.id} message={message} deleteMessage={this.props.deleteMessage} updateMessage={this.props.updateMessage} roomId={this.props.roomId} />);
+      messages.push(<Message key={message.id} message={message} deleteMessage={this.props.deleteMessage} updateMessage={this.props.updateMessage} />);
     }
 
     return (

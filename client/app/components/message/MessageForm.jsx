@@ -10,8 +10,9 @@ var MessageForm = React.createClass({
 
   getDefaultProps: function () {
     return {
-      username: 'Gunnari',
-      editing: false
+      username: 'Anonymous',
+      editing: false,
+      addOrEdit: 'Add'
     };
   },
 
@@ -19,13 +20,11 @@ var MessageForm = React.createClass({
     e.preventDefault();
     var messageNode = this.refs.message.getDOMNode();
     var message = messageNode.value.trim();
-    var roomId = parseInt(this.props.roomId, 10);
 
     if (this.props.editing) {
-      this.props.updateMessage(message, roomId, this.props.message.id);
-      this.props.closeEditForm();
+      this.props.updateMessage(message);
     } else {
-      this.props.createMessage(message, roomId, this.props.username);
+      this.props.createMessage(message, this.props.username);
     }
 
     messageNode.value = '';
@@ -34,8 +33,8 @@ var MessageForm = React.createClass({
   render: function () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input placeholder={this.props.editing ? "Edit Message": "New Message"} defaultValue={this.props.text} ref="message"></input>
-        <button type='submit'>{this.props.editing ? 'Edit' : 'Add'}</button>
+        <input placeholder={this.props.addOrEdit + " Message"} defaultValue={this.props.text} ref="message"></input>
+        <button type='submit'>{this.props.addOrEdit}</button>
       </form>
     );
   }

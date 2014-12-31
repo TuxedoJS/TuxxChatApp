@@ -13,9 +13,8 @@ var MessageView = React.createClass({
     Router.State
   ],
 
-  getMessagesForRoom: function (id) {
-    id = parseInt(this.getParams().roomId, 10);
-    MessageStore.get(id);
+  getMessagesForRoom: function () {
+    MessageActions.get({ roomId: this.roomId() });
   },
 
   getInitialState: function () {
@@ -42,24 +41,27 @@ var MessageView = React.createClass({
     this.getMessagesForRoom();
   },
 
-  createMessage: function (text, roomId, username) {
-    MessageActions.create({ text: text, roomId: roomId, username: username });
+  roomId: function () {
+    return parseInt(this.getParams().roomId, 10);
   },
 
-  deleteMessage: function (id, roomId) {
-    MessageActions.destroy({ id: id, roomId: roomId });
+  createMessage: function (text, username) {
+    MessageActions.create({ text: text, roomId: this.roomId(), username: username });
   },
 
-  updateMessage: function (text, roomId, id) {
-    MessageActions.update({ id: id, text: text, roomId: roomId });
+  deleteMessage: function (id) {
+    MessageActions.destroy({ id: id, roomId: this.roomId() });
+  },
+
+  updateMessage: function (text, id) {
+    MessageActions.update({ id: id, text: text, roomId: this.roomId() });
   },
 
   render: function () {
-    var roomId = this.getParams().roomId;
     return (
       <div>
-        <MessageForm createMessage={this.createMessage} updateMessage={this.updateMessage} roomId={roomId} />
-        <Messages messages={this.state.messages} deleteMessage={this.deleteMessage} updateMessage={this.updateMessage} roomId={roomId} />
+        <MessageForm createMessage={this.createMessage} updateMessage={this.updateMessage} />
+        <Messages messages={this.state.messages} deleteMessage={this.deleteMessage} updateMessage={this.updateMessage} />
       </div>
     );
   }

@@ -17,7 +17,7 @@ var Message = React.createClass({
   },
 
   componentWillReceiveProps: function () {
-    this.setState({ editing: false });
+    this.closeEditForm();
   },
 
   closeEditForm: function() {
@@ -33,14 +33,19 @@ var Message = React.createClass({
 
   deleteMessage: function(e) {
     e.preventDefault();
-    this.props.deleteMessage(this.props.message.id, this.props.roomId);
+    this.props.deleteMessage(this.props.message.id);
+  },
+
+  updateMessage: function (message) {
+    this.props.updateMessage(message, this.props.message.id);
+    this.closeEditForm();
   },
 
   render: function() {
     var editForm;
     var message = this.props.message;
     if (this.state.editing) {
-      editForm = <MessageForm message={message} editing={this.state.editing} updateMessage={this.props.updateMessage} roomId={this.props.roomId} closeEditForm={this.closeEditForm} />
+      editForm = <MessageForm message={message} editing={this.state.editing} roomId={this.props.roomId} updateMessage={this.updateMessage} addOrEdit='Edit' />
     }
 
     return (
