@@ -33,6 +33,7 @@ $.ajax = function(req) {
         else {
           defered.resolve(data.slice());
         }
+
       }
       else if (req.location === 'messages') {
         if (typeof(req.data.roomId) !== 'undefined') {
@@ -97,7 +98,6 @@ $.ajax = function(req) {
               }
             }
           }
-          defered.resolve(true);
         }
       }
     }, 2000);
