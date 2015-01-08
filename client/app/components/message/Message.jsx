@@ -5,9 +5,7 @@ var MessageForm = require('./MessageForm.jsx');
 
 var Message = React.createMutableClass({
   propTypes: {
-    message: React.PropTypes.object.isRequired,
-    deleteMessage: React.PropTypes.func,
-    updateMessage: React.PropTypes.func
+    message: React.PropTypes.object.isRequired
   },
 
   mutableTraits: {
@@ -41,11 +39,6 @@ var Message = React.createMutableClass({
     this.nearestOwnerProps.deleteMessage(this.props.message.id);
   },
 
-  updateMessage: function (message) {
-    this.nearestOwnerProps.updateMessage(message, this.props.message.id);
-    this.closeEditForm();
-  },
-
   render: function() {
     var editForm;
     var message = this.props.message;
@@ -57,7 +50,7 @@ var Message = React.createMutableClass({
       <li key={message.id}>
         {message.username} - {message.text} <br />
         {editForm}
-        <button onClick={this.deleteMessage}>Delete</button><button onClick={this.edit}>Edit</button>
+        <button onClick={this.deleteMessage}>Delete</button><button onClick={this.edit}>{this.state.editing ? 'Cancel' : 'Edit'}</button>
       </li>
     );
   }

@@ -2,7 +2,6 @@
 
 var React = require('tux/React');
 var Message = require('./Message.jsx');
-var Animations
 
 var Messages = React.createOwneeClass({
   propTypes: {

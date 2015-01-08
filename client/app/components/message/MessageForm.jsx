@@ -3,10 +3,6 @@
 var React = require('tux/React');
 
 var MessageForm = React.createOwneeClass({
-  propTypes: {
-    createMessage: React.PropTypes.func,
-    updateMessage: React.PropTypes.func
-  },
 
   getDefaultProps: function () {
     return {
@@ -22,7 +18,7 @@ var MessageForm = React.createOwneeClass({
     var message = messageNode.value.trim();
 
     if (this.props.editing) {
-      this.nearestOwnerProps.updateMessage(message);
+      this.nearestOwnerProps.updateMessage(message, this.props.message.id);
     } else {
       this.nearestOwnerProps.createMessage(message, this.props.username);
     }

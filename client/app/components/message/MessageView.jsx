@@ -13,6 +13,7 @@ var MessageView = React.createOwnerClass({
   ],
 
   getMessagesForRoom: function () {
+    this.ownerProps.roomId = this.roomId();
     MessageActions.get({ roomId: this.roomId() });
   },
 
@@ -35,8 +36,11 @@ var MessageView = React.createOwnerClass({
     }
   },
 
+  componentWillMount: function () {
+    this.getMessagesForRoom();
+  },
+
   componentWillReceiveProps: function () {
-    this.ownerProps.roomId = this.roomId();
     this.getMessagesForRoom();
   },
 
