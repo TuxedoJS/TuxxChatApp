@@ -1,14 +1,10 @@
 'use strict';
 
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var MessageConstants = require('../constants/MessageConstants');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
 var $ = require('../../helpers/AjaxHelper');
+var Stores = require('tux/Stores');
+var MessageActions = require('../actions/MessageActions');
 
-var CHANGE_EVENT = 'CHANGE';
-
-var MessageStore = assign({}, EventEmitter.prototype, {
+var MessageStore = Stores.createStore({
   _messages: [],
 
   all: function () {
@@ -83,44 +79,23 @@ var MessageStore = assign({}, EventEmitter.prototype, {
         this.emitChange();
       }.bind(this));
   },
-
-  emitChange: function () {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function (callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function (callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  }
 });
 
+MessageActions.register(MessageStore, {
+  get: function (body) {
+    MessageStore.get(body.roomId);
+  },
 
-AppDispatcher.register(function (payload) {
-  var action = payload.action;
-  var body = action.body;
+  create: function (body) {
+    MessageStore.create(body.text, body.roomId, body.username);
+  },
 
-  switch (action.actionType) {
-    case MessageConstants.MESSAGE_GET:
-      MessageStore.get(body.roomId);
-      break;
+  destroy: function (body) {
+    MessageStore.destroy(body.id, body.roomId);
+  },
 
-    case MessageConstants.MESSAGE_CREATE:
-      MessageStore.create(body.text, body.roomId, body.username);
-      break;
-
-    case MessageConstants.MESSAGE_UPDATE:
-      MessageStore.update(body.text, body.roomId, body.id);
-      break;
-
-    case MessageConstants.MESSAGE_DESTROY:
-      MessageStore.destroy(body.id, body.roomId);
-      break;
-
-    default:
-      return true;
+  update: function (body) {
+    MessageStore.update(body.text, body.roomId, body.id);
   }
 });
 

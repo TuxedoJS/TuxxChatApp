@@ -1,8 +1,8 @@
 'use strict';
 
-var React = require('react');
+var React = require('tux/React');
 
-var MessageForm = React.createClass({
+var MessageForm = React.createOwneeClass({
   propTypes: {
     createMessage: React.PropTypes.func,
     updateMessage: React.PropTypes.func
@@ -22,9 +22,9 @@ var MessageForm = React.createClass({
     var message = messageNode.value.trim();
 
     if (this.props.editing) {
-      this.props.updateMessage(message);
+      this.nearestOwnerProps.updateMessage(message);
     } else {
-      this.props.createMessage(message, this.props.username);
+      this.nearestOwnerProps.createMessage(message, this.props.username);
     }
 
     messageNode.value = '';
