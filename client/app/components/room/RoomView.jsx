@@ -1,16 +1,16 @@
 'use strict';
 
-var React = require("react");
+var React = require("tux/React");
 var RoomStore = require("../../stores/RoomStore.js");
 var RoomActions = require("../../actions/RoomActions.js");
 var Rooms = require("./Rooms.jsx");
 var RoomCreateForm = require("./RoomCreateForm.jsx");
-var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
+var RouterState = require('tux/Router/State');
+var RouteHandler = require('tux/Router/RouteHandler');
 
-var RoomView = React.createClass({
+var RoomView = React.createOwnerClass({
   mixins: [
-    Router.State
+    RouterState
   ],
 
   getInitialState: function() {
@@ -25,8 +25,14 @@ var RoomView = React.createClass({
     });
   },
 
+  connectOwnerToStore: {
+    store: RoomStore,
+    listener: function() {
+      this.listenerCallback();
+    }
+  },
+
   componentDidMount: function() {
-    RoomStore.addChangeListener(this.listenerCallback);
     RoomActions.get();
   },
 
@@ -34,7 +40,7 @@ var RoomView = React.createClass({
     RoomStore.removeChangeListener(this.listenerCallback);
   },
 
-  methods: {
+  ownerProps: {
 
     createRoom: function(name) {
       RoomActions.create({name: name});
@@ -47,11 +53,9 @@ var RoomView = React.createClass({
     updateRoom: function(name, id) {
       RoomActions.update({name:name, id:id});
     }
-
   },
 
   render: function() {
-    var { createRoom, ...methods } = this.methods;
     var rooms = this.state.rooms;
     var roomId = this.getParams().roomId;
     if (roomId !== undefined) {
@@ -64,9 +68,9 @@ var RoomView = React.createClass({
     }
     return (
       <div>
-        <RoomCreateForm createRoom={createRoom} />
+        <RoomCreateForm />
         <h1>{roomName ? 'You are in room: ' + roomName : "Click a room name to continue"}</h1>
-        <Rooms rooms={this.state.rooms} {...methods} />
+        <Rooms rooms={this.state.rooms} />
         <RouteHandler />
       </div>
     );

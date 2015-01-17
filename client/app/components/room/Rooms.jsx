@@ -1,22 +1,17 @@
 'use strict';
 
-var React = require("react");
-var Room = require("./Room.jsx")
+var React = require("tux/React");
+var Room = require("./Room.jsx");
 
-var Rooms = React.createClass({
+var Rooms = React.createOwneeClass({
   propTypes: {
-    rooms: React.PropTypes.array.isRequired,
-    deleteRoom: React.PropTypes.func,
-    updateRoom: React.PropTypes.func
+    rooms: React.PropTypes.array.isRequired
   },
 
   render: function() {
-    var { rooms, ...methods } = this.props;
-    var roomComponents = [];
-
-    for (var i = 0; i < rooms.length; i++) {
-      roomComponents.push(<Room key={rooms[i].id} {...methods} room={rooms[i]} />);
-    }
+    var roomComponents = this.props.rooms.map(function(room) {
+      return <Room key={room.id} room={room} />;
+    })
     return (
       <div>
         { roomComponents }
