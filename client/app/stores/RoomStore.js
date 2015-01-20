@@ -1,88 +1,57 @@
 'use strict';
 
-var TuxStore = require("tux/Stores")
-var RoomActions = require("../actions/RoomActions");
-var $ = require("../../helpers/AjaxHelper.js");
-var ROOMS = 'rooms';
+var RoomActions = require('../actions/RoomActions');
 
-var req = {
-  type: 'GET',
-  location: ROOMS,
-  data: {}
-};
+var ActionStores = require('tux/Stores/ActionStores');
 
-var RoomStore = TuxStore.createStore({
+var RoomStore = ActionStores.createStore({
   _rooms: [],
 
-  getAll: function() {
+  getAll: function () {
     return this._rooms;
   },
 
-  get: function() {
-    req.type = "GET";
-    $.ajax(req)
-      .then(function(data) {
-        this._rooms = data;
-        this.emitChange();
-      }.bind(this));
+  onGet: function (data) {
+    this._rooms = data;
+    this.emitChange();
   },
 
-  create: function(name) {
-    req.data.roomname = name;
-    req.type = "POST";
-    $.ajax(req)
-      .then(function(data) {
-        this._rooms.push(data);
-        this.emitChange();
-      }.bind(this));
+ onCreate: function (data) {
+    this._rooms.push(data);
+    this.emitChange();
   },
 
-  update: function(id, name) {
-    req.data.roomname = name;
-    req.data.roomId = id;
-    req.type = "PUT";
-    $.ajax(req)
-      .then(function(data) {
-        var rooms = this._rooms;
-        for (var i = 0; i < rooms.length; i++) {
-          if (rooms[i].id === id) {
-            rooms[i] = data;
-            break;
-          }
-        }
-        this.emitChange();
-      }.bind(this));
+  onUpdate: function (data) {
+    var rooms = this._rooms;
+    for (var i = 0; i < rooms.length; i++) {
+      if (rooms[i].id === data.id) {
+        rooms[i] = data;
+        break;
+      }
+    }
+    this.emitChange();
   },
 
-  destroy: function(id) {
-    req.data.roomId = id;
-    req.type = "DELETE";
-    $.ajax(req)
-      .then(function(data) {
-        var rooms = this._rooms;
-        for (var i = 0; i < rooms.length; i++) {
-          if (rooms[i].id === id) {
-            rooms.splice(i, 1);
-            break;
-          }
-        }
-        this.emitChange();
-      }.bind(this));
-  }
-});
+  onDestroy: function (data) {
+    var rooms = this._rooms;
+    for (var i = 0; i < rooms.length; i++) {
+      if (rooms[i].id === data.id) {
+        rooms.splice(i, 1);
+        break;
+      }
+    }
+    this.emitChange();
+  },
 
-RoomActions.register(RoomStore, {
-  create: function(body) {
-    RoomStore.create(body.name);
-  },
-  get: function() {
-    RoomStore.get();
-  },
-  update: function(body) {
-    RoomStore.update(body.id, body.name);
-  },
-  destroy: function(body) {
-    RoomStore.destroy(body.id);
+  register: function () {
+    return {
+      rooms: {
+        get: this.onGet,
+        create: this.onCreate,
+        update: this.onUpdate,
+        destroy: this.onDestroy
+      }
+    };
   }
 });
 

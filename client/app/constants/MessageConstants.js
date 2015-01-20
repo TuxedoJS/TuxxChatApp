@@ -1,8 +1,0 @@
-var MessageConstants = {
-  MESSAGE_CREATE: 'MESSAGE_CREATE',
-  MESSAGE_DESTROY: 'MESSAGE_DESTROY',
-  MESSAGE_UPDATE: 'MESSAGE_UPDATE',
-  MESSAGE_GET: 'MESSAGE_GET'
-};
-
-module.exports = MessageConstants;

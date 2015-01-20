@@ -2,59 +2,54 @@ var rooms =
 [
   {
     id: 1,
-    name: 'Cool Room',
+    name: 'Lobby',
     messages: [
       {
         id: 1,
         username: 'Pat',
-        text: 'stuff'
+        text: 'How is everyone doing today?'
       },
       {
         id: 2,
         username: 'Dmitri',
-        text: 'other stuff'
+        text: 'Just having some fun with TuxedoJS, how about yourself?'
       }
     ]
   },
   {
     id: 2,
-    name: 'Coolio Room',
+    name: 'Private Discussion with Gunnari',
     messages: [
       {
         id: 3,
         username: 'Gunnari',
-        text: 'more chatting'
-      },
-      {
-        id: 4,
-        username: 'Spencer',
-        text: 'lets talk'
+        text: 'Have you heard about this awesome new framework TuxedoJS?'
       }
     ]
   },
   {
     id: 3,
-    name: 'Full Room',
+    name: 'TuxedoJS Team',
     messages: [
       {
         id: 5,
         username: 'Pat',
-        text: 'we are talking'
+        text: 'Welcome to the Tux Chat App!'
       },
       {
         id: 6,
         username: 'Dmitri',
-        text: 'about stuff'
+        text: 'Built entirely with TuxedoJS!'
       },
       {
         id: 7,
         username: 'Gunnari',
-        text: 'its good'
+        text: 'We\'re really excited to see what awesome stuff you can build with Tux'
       },
       {
         id: 8,
         username: 'Spencer',
-        text: 'true'
+        text: 'Let us know what you think of the TuxedoJS at github.com/TuxedoJS/TuxedoJS'
       }
     ]
   }

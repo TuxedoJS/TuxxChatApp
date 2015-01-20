@@ -1,13 +1,13 @@
 'use strict';
 
-var React = require("tux/React");
-var Link = require("tux/Router/Link");
+var React = require('tux/React');
+var Link = require('tux/Router/Link');
 
 var Room = React.createMutableClass({
-  propTypes: {
+  anyPropTypes: {
     room: React.PropTypes.object.isRequired,
-    deleteRoom: React.PropTypes.func,
-    updateRoom: React.PropTypes.func
+    deleteRoom: React.PropTypes.func.isRequired,
+    updateRoom: React.PropTypes.func.isRequired
   },
 
   getInitialState: function() {

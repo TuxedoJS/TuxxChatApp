@@ -1,13 +1,11 @@
 'use strict';
 
-var React = require('react');
+var React = require('tux/React');
 var Message = require('./Message.jsx');
 
-var Messages = React.createClass({
+var Messages = React.createOwneeClass({
   propTypes: {
-    messages: React.PropTypes.array.isRequired,
-    deleteMessage: React.PropTypes.func,
-    updateMessage: React.PropTypes.func
+    messages: React.PropTypes.array.isRequired
   },
 
   render: function () {
@@ -16,7 +14,7 @@ var Messages = React.createClass({
 
     for (var i = 0; i < this.props.messages.length; i++) {
       message = this.props.messages[i];
-      messages.push(<Message key={message.id} message={message} deleteMessage={this.props.deleteMessage} updateMessage={this.props.updateMessage} />);
+      messages.push(<Message key={message.id} message={message} />);
     }
 
     return (

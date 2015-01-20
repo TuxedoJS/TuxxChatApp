@@ -9,8 +9,9 @@ var Welcome = React.createClass({
   render: function () {
     return (
       <div>
-        <h1>Hello World!</h1>
         <Link to="rooms">View Rooms</Link>
+        <br />
+        <br />
         <RouteHandler />
       </div>
     );

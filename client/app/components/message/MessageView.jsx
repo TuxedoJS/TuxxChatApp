@@ -1,16 +1,15 @@
 'use strict';
 
-var React = require('react');
+var React = require('tux/React');
 var MessageStore = require('../../stores/MessageStore');
 var MessageActions = require('../../actions/MessageActions');
 var Messages = require('./Messages.jsx');
 var MessageForm = require('./MessageForm.jsx');
-var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
+var RouterState = require('tux/Router/State');
 
-var MessageView = React.createClass({
+var MessageView = React.createOwnerClass({
   mixins: [
-    Router.State
+    RouterState
   ],
 
   getMessagesForRoom: function () {
@@ -29,12 +28,17 @@ var MessageView = React.createClass({
     });
   },
 
-  componentDidMount: function () {
-    MessageStore.addChangeListener(this.listenerCallback);
+  connectOwnerToStore: function () {
+    return {
+      store: MessageStore,
+      listener: function () {
+        this.listenerCallback();
+      }.bind(this)
+    }
   },
 
-  componentWillUnmount: function () {
-    MessageStore.removeChangeListener(this.listenerCallback);
+  componentWillMount: function () {
+    this.getMessagesForRoom();
   },
 
   componentWillReceiveProps: function () {
@@ -45,23 +49,27 @@ var MessageView = React.createClass({
     return parseInt(this.getParams().roomId, 10);
   },
 
-  createMessage: function (text, username) {
-    MessageActions.create({ text: text, roomId: this.roomId(), username: username });
-  },
+  registerOwnerProps: function () {
+    return {
+      createMessage: function (text, username) {
+        MessageActions.create({ text: text, roomId: this.roomId(), username: username });
+      }.bind(this),
 
-  deleteMessage: function (id) {
-    MessageActions.destroy({ id: id, roomId: this.roomId() });
-  },
+      deleteMessage: function (id) {
+        MessageActions.destroy({ id: id, roomId: this.roomId() });
+      }.bind(this),
 
-  updateMessage: function (text, id) {
-    MessageActions.update({ id: id, text: text, roomId: this.roomId() });
+      updateMessage: function (text, id) {
+        MessageActions.update({ id: id, text: text, roomId: this.roomId() });
+      }.bind(this)
+    };
   },
 
   render: function () {
     return (
       <div>
-        <MessageForm createMessage={this.createMessage} updateMessage={this.updateMessage} />
-        <Messages messages={this.state.messages} deleteMessage={this.deleteMessage} updateMessage={this.updateMessage} />
+        <MessageForm />
+        <Messages messages={this.state.messages} />
       </div>
     );
   }
