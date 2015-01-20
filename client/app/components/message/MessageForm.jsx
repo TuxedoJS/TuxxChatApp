@@ -3,6 +3,10 @@
 var React = require('tux/React');
 
 var MessageForm = React.createOwneeClass({
+  anyPropTypes: {
+    updateMessage: React.PropTypes.func.isRequired,
+    createMessage: React.PropTypes.func.isRequired
+  },
 
   getDefaultProps: function () {
     return {

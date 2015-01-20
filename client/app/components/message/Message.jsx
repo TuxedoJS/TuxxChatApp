@@ -4,8 +4,9 @@ var React = require('tux/React');
 var MessageForm = require('./MessageForm.jsx');
 
 var Message = React.createMutableClass({
-  propTypes: {
-    message: React.PropTypes.object.isRequired
+  anyPropTypes: {
+    message: React.PropTypes.object.isRequired,
+    deleteMessage: React.PropTypes.func.isRequired
   },
 
   mutableTraits: {

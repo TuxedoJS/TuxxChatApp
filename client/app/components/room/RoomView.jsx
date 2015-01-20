@@ -13,49 +13,48 @@ var RoomView = React.createOwnerClass({
     RouterState
   ],
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       rooms: RoomStore.getAll()
     };
   },
 
-  listenerCallback: function() {
+  listenerCallback: function () {
     this.setState({
       rooms: RoomStore.getAll()
     });
   },
 
-  connectOwnerToStore: {
-    store: RoomStore,
-    listener: function() {
-      this.listenerCallback();
-    }
+  connectOwnerToStore: function () {
+    return {
+      store: RoomStore,
+      listener: function () {
+        this.listenerCallback();
+      }.bind(this)
+    };
   },
 
-  componentDidMount: function() {
+  componentWillMount: function () {
     RoomActions.get();
   },
 
-  componentWillUnmount: function() {
-    RoomStore.removeChangeListener(this.listenerCallback);
+  registerOwnerProps: function () {
+    return {
+      createRoom: function (name) {
+        RoomActions.create({name: name});
+      },
+
+      deleteRoom: function (id) {
+        RoomActions.destroy({id: id});
+      },
+
+      updateRoom: function (name, id) {
+        RoomActions.update({name:name, id:id});
+      }
+    };
   },
 
-  ownerProps: {
-
-    createRoom: function(name) {
-      RoomActions.create({name: name});
-    },
-
-    deleteRoom: function(id) {
-      RoomActions.destroy({id: id});
-    },
-
-    updateRoom: function(name, id) {
-      RoomActions.update({name:name, id:id});
-    }
-  },
-
-  render: function() {
+  render: function () {
     var rooms = this.state.rooms;
     var roomId = this.getParams().roomId;
     if (roomId !== undefined) {
@@ -69,8 +68,11 @@ var RoomView = React.createOwnerClass({
     return (
       <div>
         <RoomCreateForm />
-        <h1>{roomName ? 'You are in room: ' + roomName : "Click a room name to continue"}</h1>
         <Rooms rooms={this.state.rooms} />
+        <br />
+        <br />
+        <h1>{roomName ? 'You are in room: ' + roomName : "Click a room name to continue"}</h1>
+        <br />
         <RouteHandler />
       </div>
     );

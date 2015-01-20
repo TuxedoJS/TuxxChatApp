@@ -44,7 +44,7 @@ $.ajax = function(req) {
           }
         }
       }
-    }, 2000);
+    }, 100);
   }
   else if (req.type === 'POST') {
     setTimeout(function() {
@@ -76,7 +76,7 @@ $.ajax = function(req) {
           }
         }
       }
-    }, 2000);
+    }, 100);
   }
   else if (req.type === 'PUT') {
     setTimeout(function() {
@@ -100,7 +100,7 @@ $.ajax = function(req) {
           }
         }
       }
-    }, 2000);
+    }, 100);
   }
   else if (req.type === 'DELETE') {
     setTimeout(function() {
@@ -125,7 +125,7 @@ $.ajax = function(req) {
           defered.resolve(true);
         }
       }
-    }, 2000);
+    }, 100);
   }
 
   return defered.promise;

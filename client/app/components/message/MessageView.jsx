@@ -13,7 +13,6 @@ var MessageView = React.createOwnerClass({
   ],
 
   getMessagesForRoom: function () {
-    this.ownerProps.roomId = this.roomId();
     MessageActions.get({ roomId: this.roomId() });
   },
 
@@ -29,10 +28,12 @@ var MessageView = React.createOwnerClass({
     });
   },
 
-  connectOwnerToStore: {
-    store: MessageStore,
-    listener: function () {
-      this.listenerCallback();
+  connectOwnerToStore: function () {
+    return {
+      store: MessageStore,
+      listener: function () {
+        this.listenerCallback();
+      }.bind(this)
     }
   },
 
@@ -48,20 +49,20 @@ var MessageView = React.createOwnerClass({
     return parseInt(this.getParams().roomId, 10);
   },
 
-  ownerProps: {
+  registerOwnerProps: function () {
+    return {
+      createMessage: function (text, username) {
+        MessageActions.create({ text: text, roomId: this.roomId(), username: username });
+      }.bind(this),
 
-    createMessage: function (text, username) {
-      MessageActions.create({ text: text, roomId: this.roomId, username: username });
-    },
+      deleteMessage: function (id) {
+        MessageActions.destroy({ id: id, roomId: this.roomId() });
+      }.bind(this),
 
-    deleteMessage: function (id) {
-      MessageActions.destroy({ id: id, roomId: this.roomId });
-    },
-
-    updateMessage: function (text, id) {
-      MessageActions.update({ id: id, text: text, roomId: this.roomId });
-    }
-
+      updateMessage: function (text, id) {
+        MessageActions.update({ id: id, text: text, roomId: this.roomId() });
+      }.bind(this)
+    };
   },
 
   render: function () {

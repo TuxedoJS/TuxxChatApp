@@ -1,5 +1,7 @@
 'use strict';
 
+var MessageActions = require('../actions/MessageActions');
+
 var ActionStores = require('tux/Stores/ActionStores');
 
 var MessageStore = ActionStores.createStore({
