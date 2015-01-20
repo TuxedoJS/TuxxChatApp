@@ -1,15 +1,11 @@
 'use strict';
 
-var React = require("react");
+var React = require("tux/React");
 
-var RoomCreateForm = React.createClass({
-  propTypes: {
-    createRoom: React.PropTypes.func.isRequired
-  },
-
+var RoomCreateForm = React.createOwneeClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    this.props.createRoom(this.state.message);
+    this.nearestOwnerProps.createRoom(this.state.message);
     this.setState({message: ''});
   },
 

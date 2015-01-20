@@ -1,10 +1,7 @@
 'use strict';
 
-var EventEmitter = require("events").EventEmitter;
-var RoomConstants = require("../constants/RoomConstants.js");
-var AppDispatcher = require("../dispatcher/AppDispatcher.js");
-var objectAssign = require("object-assign");
-var CHANGE_EVENT = "CHANGE";
+var TuxStore = require("tux/Stores")
+var RoomActions = require("../actions/RoomActions");
 var $ = require("../../helpers/AjaxHelper.js");
 var ROOMS = 'rooms';
 
@@ -14,7 +11,7 @@ var req = {
   data: {}
 };
 
-var RoomStore = objectAssign({}, EventEmitter.prototype, {
+var RoomStore = TuxStore.createStore({
   _rooms: [],
 
   getAll: function() {
@@ -71,41 +68,21 @@ var RoomStore = objectAssign({}, EventEmitter.prototype, {
         }
         this.emitChange();
       }.bind(this));
-  },
-
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
   }
-
 });
 
-AppDispatcher.register(function(payload) {
-  var action = payload.action;
-  var body = action.body;
-
-  switch (action.actionType) {
-    case RoomConstants.ROOM_CREATE:
-      return RoomStore.create(body.name);
-
-    case RoomConstants.ROOM_GET:
-      return RoomStore.get();
-
-    case RoomConstants.ROOM_UPDATE:
-      return RoomStore.update(body.id, body.name);
-
-    case RoomConstants.ROOM_DESTROY:
-      return RoomStore.destroy(body.id);
-
-    default:
-      return true;
+RoomActions.register(RoomStore, {
+  create: function(body) {
+    RoomStore.create(body.name);
+  },
+  get: function() {
+    RoomStore.get();
+  },
+  update: function(body) {
+    RoomStore.update(body.id, body.name);
+  },
+  destroy: function(body) {
+    RoomStore.destroy(body.id);
   }
 });
 

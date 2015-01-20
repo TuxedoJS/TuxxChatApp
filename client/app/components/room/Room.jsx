@@ -1,10 +1,9 @@
 'use strict';
 
-var React = require("react");
-var Router = require('react-router');
-var Link = Router.Link;
+var React = require("tux/React");
+var Link = require("tux/Router/Link");
 
-var Room = React.createClass({
+var Room = React.createMutableClass({
   propTypes: {
     room: React.PropTypes.object.isRequired,
     deleteRoom: React.PropTypes.func,
@@ -20,12 +19,12 @@ var Room = React.createClass({
 
   deleteRoom: function(e) {
     e.preventDefault();
-    this.props.deleteRoom(this.props.room.id);
+    this.nearestOwnerProps.deleteRoom(this.props.room.id);
   },
 
   updateRoom: function(e) {
     e.preventDefault();
-    this.props.updateRoom(this.state.message, this.props.room.id);
+    this.nearestOwnerProps.updateRoom(this.state.message, this.props.room.id);
   },
 
   componentWillReceiveProps: function() {

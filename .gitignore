@@ -3,3 +3,4 @@ dist/
 .sass-cache/
 client/bundle.js
 npm-debug.log
+.floo
