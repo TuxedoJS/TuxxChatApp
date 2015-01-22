@@ -1,9 +1,9 @@
 'use strict';
 
-var React = require('tux/React');
+var React = require('tuxx/React');
 var Room = require('./Room.jsx');
 
-var Zoom = require('tux/Animations/Zoom');
+var Zoom = require('tuxx/Animations/Zoom');
 
 var Rooms = React.createOwneeClass({
   propTypes: {

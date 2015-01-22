@@ -1,5 +1,5 @@
 {
-  "name": "TuxChatApp",
+  "name": "TuxxChatApp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TuxedoJS/TuxChatApp"
+    "url": "https://github.com/TuxedoJS/TuxxChatApp"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TuxedoJS/TuxChatApp/issues"
+    "url": "https://github.com/TuxedoJS/TuxxChatApp/issues"
   },
-  "homepage": "https://github.com/TuxedoJS/TuxChatApp",
+  "homepage": "https://github.com/TuxedoJS/TuxxChatApp",
   "devDependencies": {
     "browserify": "^7.0.3",
     "envify": "^3.2.0",
@@ -35,6 +35,7 @@
     "object-assign": "^2.0.0",
     "q": "^1.1.2",
     "react": "^0.12.2",
-    "react-router": "^0.11.6"
+    "react-router": "^0.11.6",
+    "tuxx": "^0.1.0"
   }
 }

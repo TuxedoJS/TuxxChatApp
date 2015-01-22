@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('tux/React');
-var Link = require('tux/Router/Link');
+var React = require('tuxx/React');
+var Link = require('tuxx/Router/Link');
 
 var Room = React.createMutableClass({
   anyPropTypes: {

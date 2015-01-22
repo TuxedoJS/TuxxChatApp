@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('../../helpers/AjaxHelper');
-var Actions = require('tux/Actions');
+var Actions = require('tuxx/Actions');
 
 var MessageActions = Actions.createActionCategory({
   category: 'message',

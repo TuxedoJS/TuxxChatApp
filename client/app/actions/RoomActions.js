@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('../../helpers/AjaxHelper');
-var TuxActions = require('tux/Actions');
+var TuxActions = require('tuxx/Actions');
 
 var RoomActions = TuxActions.createActionCategory({
   category: 'rooms',

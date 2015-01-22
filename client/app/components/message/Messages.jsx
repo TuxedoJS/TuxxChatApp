@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('tux/React');
+var React = require('tuxx/React');
 var Message = require('./Message.jsx');
 
 var Messages = React.createOwneeClass({
