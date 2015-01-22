@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('tuxx/React');
 
 var DefaultWelcome = React.createClass({
   render: function () {

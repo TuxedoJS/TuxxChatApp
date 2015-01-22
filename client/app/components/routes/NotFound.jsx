@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('tuxx/React');
 
 var NotFound = React.createClass({
   render: function() {
