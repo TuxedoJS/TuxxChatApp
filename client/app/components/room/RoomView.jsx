@@ -1,12 +1,12 @@
 'use strict';
 
-var React = require("tux/React");
+var React = require("tuxx/React");
 var RoomStore = require("../../stores/RoomStore.js");
 var RoomActions = require("../../actions/RoomActions.js");
 var Rooms = require("./Rooms.jsx");
 var RoomCreateForm = require("./RoomCreateForm.jsx");
-var RouterState = require('tux/Router/State');
-var RouteHandler = require('tux/Router/RouteHandler');
+var RouterState = require('tuxx/Router/State');
+var RouteHandler = require('tuxx/Router/RouteHandler');
 
 var RoomView = React.createOwnerClass({
   mixins: [

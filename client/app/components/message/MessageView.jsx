@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('tux/React');
+var React = require('tuxx/React');
 var MessageStore = require('../../stores/MessageStore');
 var MessageActions = require('../../actions/MessageActions');
 var Messages = require('./Messages.jsx');
 var MessageForm = require('./MessageForm.jsx');
-var RouterState = require('tux/Router/State');
+var RouterState = require('tuxx/Router/State');
 
 var MessageView = React.createOwnerClass({
   mixins: [

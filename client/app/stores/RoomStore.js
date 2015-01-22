@@ -2,7 +2,7 @@
 
 var RoomActions = require('../actions/RoomActions');
 
-var ActionStores = require('tux/Stores/ActionStores');
+var ActionStores = require('tuxx/Stores/ActionStores');
 
 var RoomStore = ActionStores.createStore({
   _rooms: [],

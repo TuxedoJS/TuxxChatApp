@@ -2,7 +2,7 @@
 
 //Define app architecture here
 
-var architect = require('tux/Architecture').architect;
+var architect = require('tuxx/Architecture').architect;
 
 var RoomStore = require('./app/stores/RoomStore');
 var MessageStore = require('./app/stores/MessageStore');
@@ -12,13 +12,13 @@ architect(MessageStore).itNeeds('rooms').itOutputs('messages');
 
 //Define app routes here
 
-var React = require('tux/React');
-var Route = require('tux/Router/Route');
-var NotFoundRoute = require('tux/Router/NotFoundRoute');
-var DefaultRoute = require('tux/Router/DefaultRoute');
-var Link = require('tux/Router/Link');
-var RouteHandler = require('tux/Router/RouteHandler');
-var run = require('tux/Router/run');
+var React = require('tuxx/React');
+var Route = require('tuxx/Router/Route');
+var NotFoundRoute = require('tuxx/Router/NotFoundRoute');
+var DefaultRoute = require('tuxx/Router/DefaultRoute');
+var Link = require('tuxx/Router/Link');
+var RouteHandler = require('tuxx/Router/RouteHandler');
+var run = require('tuxx/Router/run');
 
 var Welcome = require('./app/components/Welcome.jsx');
 var NotFound = require('./app/components/routes/NotFound.jsx');

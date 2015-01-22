@@ -2,7 +2,7 @@
 
 var MessageActions = require('../actions/MessageActions');
 
-var ActionStores = require('tux/Stores/ActionStores');
+var ActionStores = require('tuxx/Stores/ActionStores');
 
 var MessageStore = ActionStores.createStore({
   _messages: [],

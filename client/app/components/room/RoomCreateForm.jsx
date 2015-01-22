@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require("tux/React");
+var React = require("tuxx/React");
 
 var RoomCreateForm = React.createOwneeClass({
   handleSubmit: function(e) {
