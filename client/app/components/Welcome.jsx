@@ -1,8 +1,7 @@
 'use strict';
 
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+var React = require('tuxx/React');
+var Link = require('tuxx/Router/Link');
 var RouteHandler = Router.RouteHandler;
 
 var Welcome = React.createClass({
