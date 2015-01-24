@@ -34,7 +34,7 @@ var rooms =
       {
         id: 5,
         username: 'Pat',
-        text: 'Welcome to the Tux Chat App!'
+        text: 'Welcome to the Tuxx Chat App!'
       },
       {
         id: 6,
@@ -44,7 +44,7 @@ var rooms =
       {
         id: 7,
         username: 'Gunnari',
-        text: 'We\'re really excited to see what awesome stuff you can build with Tux'
+        text: 'We\'re really excited to see what awesome stuff you can build with Tuxx'
       },
       {
         id: 8,
