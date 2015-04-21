@@ -5,12 +5,13 @@ var MessageStore = require('../../stores/MessageStore');
 var MessageActions = require('../../actions/MessageActions');
 var Messages = require('./Messages.jsx');
 var MessageForm = require('./MessageForm.jsx');
-var RouterState = require('tuxx/Router/State');
 
 var MessageView = React.createOwnerClass({
-  mixins: [
-    RouterState
-  ],
+  displayName: 'MessageView',
+
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   getMessagesForRoom: function () {
     MessageActions.get({ roomId: this.roomId() });
@@ -46,7 +47,7 @@ var MessageView = React.createOwnerClass({
   },
 
   roomId: function () {
-    return parseInt(this.getParams().roomId, 10);
+    return parseInt(this.context.router.getCurrentParams().roomId, 10);
   },
 
   registerOwnerProps: function () {

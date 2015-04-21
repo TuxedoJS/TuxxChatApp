@@ -4,6 +4,8 @@ var React = require('tuxx/React');
 var MessageForm = require('./MessageForm.jsx');
 
 var Message = React.createMutableClass({
+  displayName: 'Message',
+
   anyPropTypes: {
     message: React.PropTypes.object.isRequired,
     deleteMessage: React.PropTypes.func.isRequired

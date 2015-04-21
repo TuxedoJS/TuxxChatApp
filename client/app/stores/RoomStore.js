@@ -16,7 +16,7 @@ var RoomStore = ActionStores.createStore({
     this.emitChange();
   },
 
- onCreate: function (data) {
+  onCreate: function (data) {
     this._rooms.push(data);
     this.emitChange();
   },

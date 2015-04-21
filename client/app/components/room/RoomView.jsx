@@ -5,13 +5,14 @@ var RoomStore = require("../../stores/RoomStore.js");
 var RoomActions = require("../../actions/RoomActions.js");
 var Rooms = require("./Rooms.jsx");
 var RoomCreateForm = require("./RoomCreateForm.jsx");
-var RouterState = require('tuxx/Router/State');
 var RouteHandler = require('tuxx/Router/RouteHandler');
 
 var RoomView = React.createOwnerClass({
-  mixins: [
-    RouterState
-  ],
+  displayName: 'RoomView',
+
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   getInitialState: function () {
     return {
@@ -49,14 +50,14 @@ var RoomView = React.createOwnerClass({
       },
 
       updateRoom: function (name, id) {
-        RoomActions.update({name:name, id:id});
+        RoomActions.update({name: name, id: id});
       }
     };
   },
 
   render: function () {
     var rooms = this.state.rooms;
-    var roomId = this.getParams().roomId;
+    var roomId = this.context.router.getCurrentParams().roomId;
     if (roomId !== undefined) {
       var roomName;
       for (var i = 0; i < rooms.length; i++) {
