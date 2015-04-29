@@ -4,6 +4,8 @@ var React = require('tuxx/React');
 var Message = require('./Message.jsx');
 
 var Messages = React.createOwneeClass({
+  displayName: 'Messages',
+
   propTypes: {
     messages: React.PropTypes.array.isRequired
   },

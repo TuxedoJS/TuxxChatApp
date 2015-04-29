@@ -3,21 +3,23 @@
 var React = require("tuxx/React");
 
 var RoomCreateForm = React.createOwneeClass({
-  handleSubmit: function(e) {
+  displayName: 'RoomCreateForm',
+
+  handleSubmit: function (e) {
     e.preventDefault();
     this.nearestOwnerProps.createRoom(this.state.message);
     this.setState({message: ''});
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {message: ''};
   },
 
-  handleChange: function(event) {
+  handleChange: function (event) {
     this.setState({message: event.target.value});
   },
 
-  render: function() {
+  render: function () {
     var message = this.state.message;
     return (
       <form onSubmit={this.handleSubmit}>

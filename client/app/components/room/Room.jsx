@@ -4,34 +4,36 @@ var React = require('tuxx/React');
 var Link = require('tuxx/Router/Link');
 
 var Room = React.createMutableClass({
+  displayName: 'Room',
+
   anyPropTypes: {
     room: React.PropTypes.object.isRequired,
     deleteRoom: React.PropTypes.func.isRequired,
     updateRoom: React.PropTypes.func.isRequired
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       editing: false,
       message: ''
     };
   },
 
-  deleteRoom: function(e) {
+  deleteRoom: function (e) {
     e.preventDefault();
     this.nearestOwnerProps.deleteRoom(this.props.room.id);
   },
 
-  updateRoom: function(e) {
+  updateRoom: function (e) {
     e.preventDefault();
     this.nearestOwnerProps.updateRoom(this.state.message, this.props.room.id);
   },
 
-  componentWillReceiveProps: function() {
+  componentWillReceiveProps: function () {
     this.setState({editing : false});
   },
 
-  edit: function(e) {
+  edit: function (e) {
     e.preventDefault();
     this.setState({
       editing: !this.state.editing,
@@ -39,13 +41,12 @@ var Room = React.createMutableClass({
     });
   },
 
-  handleChange: function(event) {
+  handleChange: function (event) {
     this.setState({message: event.target.value});
   },
 
-  render: function() {
+  render: function () {
     var roomContent;
-
     if (this.state.editing) {
       roomContent = (
         <form onSubmit={this.updateRoom}>

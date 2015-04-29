@@ -3,6 +3,8 @@
 var React = require('tuxx/React');
 
 var MessageForm = React.createOwneeClass({
+  displayName: 'MessageForm',
+
   anyPropTypes: {
     updateMessage: React.PropTypes.func.isRequired,
     createMessage: React.PropTypes.func.isRequired
@@ -18,7 +20,7 @@ var MessageForm = React.createOwneeClass({
 
   handleSubmit: function (e) {
     e.preventDefault();
-    var messageNode = this.refs.message.getDOMNode();
+    var messageNode = React.findDOMNode(this.refs.message);
     var message = messageNode.value.trim();
 
     if (this.props.editing) {
